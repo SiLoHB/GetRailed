@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cmrvi1c2ff8mv"]
+
+[ext_resource type="Script" uid="uid://daycfty4tqabu" path="res://TileHolder/TrackTile/TileAction.gd" id="1_oren2"]
+
+[node name="TrackTile" type="Node2D" unique_id=199868156]
+script = ExtResource("1_oren2")
+
+[node name="LinkLeftRight" type="NavigationLink2D" parent="." unique_id=540423086]
+start_position = Vector2(8, 16)
+end_position = Vector2(24, 16)
+
+[node name="LinkTopButton" type="NavigationLink2D" parent="." unique_id=1123700987]
+start_position = Vector2(16, 8)
+end_position = Vector2(16, 24)

@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://e0bhy6f25e6y"]
+
+[ext_resource type="Script" uid="uid://4wimxhiuvepe" path="res://Actors/Station/station.gd" id="1_i7yr1"]
+[ext_resource type="Texture2D" uid="uid://cevxnvakewmme" path="res://Level/test.png" id="1_v4yli"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i7yr1"]
+size = Vector2(32, 32)
+
+[node name="Station" type="Node2D" unique_id=647371737 groups=["Station"]]
+script = ExtResource("1_i7yr1")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=7544768]
+modulate = Color(1.3957917e-06, 0.41966248, 0.31213915, 1)
+texture = ExtResource("1_v4yli")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TrainDetectionArea" unique_id=31494546]
+shape = SubResource("RectangleShape2D_i7yr1")
+
+[node name="Label" type="Label" parent="." unique_id=539563399]
+unique_name_in_owner = true
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -5.5
+offset_top = -11.166667
+offset_right = 5.5
+offset_bottom = 11.166667
+grow_horizontal = 2
+grow_vertical = 2
+text = "A"
+
+[node name="TrainDetectionArea" type="Area2D" parent="." unique_id=165800267]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TrainDetectionArea" unique_id=31494546]
+shape = SubResource("RectangleShape2D_i7yr1")
+
+[connection signal="body_entered" from="TrainDetectionArea" to="." method="_on_train_detection_area_body_entered"]

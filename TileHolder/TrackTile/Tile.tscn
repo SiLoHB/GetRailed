@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://toyrxvks063b"]
+
+[ext_resource type="Script" uid="uid://daycfty4tqabu" path="res://TileHolder/TrackTile/TileAction.gd" id="1_bjtlh"]
+[ext_resource type="TileSet" uid="uid://b4a2cqdy5q21w" path="res://Level/rails.tres" id="2_2xkra"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3da05"]
+size = Vector2(32, 32)
+
+[node name="TrackTile" type="Sprite2D" unique_id=391364208]
+script = ExtResource("1_bjtlh")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=242064565]
+unique_name_in_owner = true
+tile_set = ExtResource("2_2xkra")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=31060796]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=91417845]
+position = Vector2(16, 16)
+shape = SubResource("RectangleShape2D_3da05")
+
+[node name="desel" type="Area2D" parent="." unique_id=1248770490]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="desel" unique_id=1320658136]
+position = Vector2(16, 16)
+shape = SubResource("RectangleShape2D_3da05")
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="input_event" from="desel" to="." method="_on_desel_input_event"]

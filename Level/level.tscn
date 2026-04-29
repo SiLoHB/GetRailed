@@ -1,0 +1,78 @@
+[gd_scene format=4 uid="uid://fumaobm0h3nk"]
+
+[ext_resource type="Script" uid="uid://dl4kh0mityowt" path="res://Level/level.gd" id="1_nk1il"]
+[ext_resource type="TileSet" uid="uid://b4a2cqdy5q21w" path="res://Level/rails.tres" id="1_o6mkr"]
+[ext_resource type="PackedScene" uid="uid://bo1cpe7ekrm1q" path="res://grid_map/Grid.tscn" id="2_d6qko"]
+[ext_resource type="TileSet" uid="uid://chqweth4bxyll" path="res://Level/ground.tres" id="3_22cqp"]
+[ext_resource type="TileSet" uid="uid://dwjjjcil6r31r" path="res://Level/accessoire.tres" id="4_wqlfs"]
+[ext_resource type="PackedScene" uid="uid://d5ryhf3lp2yi" path="res://TileHolder/TrackHolder.tscn" id="6_nk1il"]
+[ext_resource type="PackedScene" uid="uid://d4fxy1jx46wg0" path="res://Actors/Train/Button/TrainButton.tscn" id="9_wqlfs"]
+
+[node name="Level" type="Node2D" unique_id=1004307011]
+script = ExtResource("1_nk1il")
+
+[node name="Ground" type="TileMapLayer" parent="." unique_id=1720023518]
+tile_map_data = PackedByteArray("AAAFAAIAAQAAAAAAAAAFAAEAAQAAAAAAAAAEAAEAAQAAAAAAAAADAAEAAQAAAAAAAAADAAIAAQAAAAAAAAADAAMAAQAAAAAAAAADAAQAAQAAAAAAAAADAAUAAQAAAAAAAAADAAYAAQAAAAAAAAADAAcAAQAAAAAAAAADAAgAAQAAAAAAAAAEAAgAAQAAAAAAAAAFAAgAAQAAAAAAAAAGAAgAAQAAAAAAAAAHAAgAAQAAAAAAAAAIAAgAAQAAAAAAAAAJAAgAAQAAAAAAAAAFAAMAAQAAAAAAAAAFAAQAAQAAAAAAAAAFAAUAAQAAAAAAAAAFAAYAAQAAAAAAAAAGAAYAAQAAAAAAAAAHAAYAAQAAAAAAAAAIAAYAAQAAAAAAAAAJAAYAAQAAAAAAAAAKAAYAAQAAAAAAAAALAAYAAQAAAAAAAAAMAAYAAQAAAAAAAAANAAYAAQAAAAAAAAAKAAgAAQAAAAAAAAALAAgAAQAAAAAAAAAMAAgAAQAAAAAAAAANAAgAAQAAAAAAAAANAAcAAQAAAAAAAAA=")
+tile_set = ExtResource("3_22cqp")
+
+[node name="Accessoire" type="TileMapLayer" parent="." unique_id=542044567]
+tile_set = ExtResource("4_wqlfs")
+
+[node name="Rails" type="TileMapLayer" parent="." unique_id=1587177521]
+tile_map_data = PackedByteArray("AAAEAAMAAAACAAMAAAAFAAMAAAACAAMAAAAHAAMAAAACAAMAAAAIAAMAAAACAAMAAAAJAAMAAQAAAAAAAQADAAMAAQAAAAAAAQA=")
+tile_set = ExtResource("1_o6mkr")
+
+[node name="Grid" parent="." unique_id=798381590 instance=ExtResource("2_d6qko")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 192.0
+offset_top = 96.0
+offset_right = 224.0
+offset_bottom = 128.0
+grow_horizontal = 1
+grow_vertical = 1
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 1
+width = 1
+height = 1
+cellWidth = 32
+cellHeight = 32
+
+[node name="Grid2" parent="." unique_id=2130844325 instance=ExtResource("2_d6qko")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 288.0
+offset_top = 96.0
+offset_right = 320.0
+offset_bottom = 128.0
+grow_horizontal = 1
+grow_vertical = 1
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 1
+width = 1
+height = 1
+cellWidth = 32
+cellHeight = 32
+
+[node name="Holder" parent="." unique_id=91845701 instance=ExtResource("6_nk1il")]
+unique_name_in_owner = true
+position = Vector2(480, 32)
+
+[node name="TrainButton" parent="." unique_id=1538748435 instance=ExtResource("9_wqlfs")]
+offset_left = 418.0
+offset_top = 34.0
+offset_right = 482.0
+offset_bottom = 66.0
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=471353477]
+position = Vector2(224, 128)
+enabled = false
+zoom = Vector2(1.5, 1.5)
+
+[node name="Stations" type="Node" parent="." unique_id=1645973348]
+
+[connection signal="gui_input" from="Grid" to="." method="_on_grid_gui_input"]

@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://cqufvx0ka57x7"]
+
+[ext_resource type="Script" uid="uid://bj71reg85o4d7" path="res://Actors/Train/train.gd" id="1_kifvw"]
+[ext_resource type="Texture2D" uid="uid://w4025pc7v33t" path="res://Actors/Train/yellow_front.png" id="2_smeso"]
+[ext_resource type="Texture2D" uid="uid://yp3b5ak1lseg" path="res://Actors/Train/yellow_side.png" id="3_7ydel"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q62qj"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w2fji"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_smeso")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_7ydel")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Train2" type="CharacterBody2D" unique_id=1029754237]
+script = ExtResource("1_kifvw")
+speed = 100
+type = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=418362020]
+shape = SubResource("RectangleShape2D_q62qj")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CollisionShape2D" unique_id=733190548]
+unique_name_in_owner = true
+sprite_frames = SubResource("SpriteFrames_w2fji")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=2014716535]
+path_desired_distance = 8.0
+target_desired_distance = 0.1
+path_postprocessing = 1
+simplify_path = true
+debug_use_custom = true
+debug_path_custom_color = Color(0.9207399, 0.0006857669, 0.9207335, 1)

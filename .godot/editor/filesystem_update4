@@ -1,0 +1,7 @@
+res://Actors/Train/train.gd
+res://TileHolder/TrackTile/CrossTile.tscn
+res://Menu/text.tres
+res://Level/rails.tres
+res://Level/gras_tileset.tres
+res://Level/accessoire.tres
+res://Actors/Station/station.gd

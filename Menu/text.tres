@@ -1,0 +1,16 @@
+[gd_resource type="TileSet" format=3 uid="uid://ufe87yxgn113"]
+
+[ext_resource type="Texture2D" uid="uid://dtaphls66opfc" path="res://Menu/tile.png" id="1_g101x"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_b133t"]
+texture = ExtResource("1_g101x")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[resource]
+tile_size = Vector2i(32, 32)
+terrain_set_0/mode = 0
+terrain_set_0/terrain_0/name = "Rails"
+terrain_set_0/terrain_0/color = Color(0.99999994, 0.12749273, 0.19794598, 1)
+navigation_layer_0/layers = 1
+sources/1 = SubResource("TileSetAtlasSource_b133t")

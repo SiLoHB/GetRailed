@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://d241kicjwuen3"]
+
+[ext_resource type="Script" uid="uid://c5w734tu3l58a" path="res://sounds/music.gd" id="1_kccue"]
+[ext_resource type="AudioStream" uid="uid://fe8hanq0tk3v" path="res://sounds/untilted7.ogg" id="2_rem1v"]
+[ext_resource type="AudioStream" uid="uid://b0pafhu5amov1" path="res://sounds/untilted8.ogg" id="3_rem1v"]
+
+[node name="Bgm" type="Node" unique_id=2100982487]
+script = ExtResource("1_kccue")
+
+[node name="sound0" type="AudioStreamPlayer" parent="." unique_id=484245218]
+stream = ExtResource("2_rem1v")
+
+[node name="sound1" type="AudioStreamPlayer" parent="." unique_id=1832595314]
+stream = ExtResource("3_rem1v")

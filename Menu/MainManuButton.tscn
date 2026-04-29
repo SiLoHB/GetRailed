@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://tmoj74mqbmef"]
+
+[ext_resource type="Script" uid="uid://yv7mcvh28i18" path="res://Menu/main_manu_button.gd" id="1_yq2ij"]
+[ext_resource type="Texture2D" uid="uid://1rjf6tft3ntq" path="res://Menu/buttonOut.png" id="2_7jbd5"]
+[ext_resource type="Texture2D" uid="uid://csgyhb0yjwxsa" path="res://Menu/buttonHover.png" id="3_l8443"]
+[ext_resource type="Texture2D" uid="uid://br6qkta5ywf7" path="res://Menu/Home.png" id="4_dex5h"]
+
+[node name="MainManuButton" type="Node2D" unique_id=930984212]
+script = ExtResource("1_yq2ij")
+
+[node name="Node2D" type="Node2D" parent="." unique_id=127627125]
+position = Vector2(-64, -32)
+
+[node name="TextureButton" type="TextureButton" parent="Node2D" unique_id=1346199525]
+offset_left = 24.0
+offset_top = 16.0
+offset_right = 88.0
+offset_bottom = 48.0
+scale = Vector2(1.35, 1.35)
+texture_normal = ExtResource("2_7jbd5")
+texture_hover = ExtResource("3_l8443")
+
+[node name="TextureRect" type="TextureRect" parent="Node2D/TextureButton" unique_id=1672948192]
+layout_mode = 0
+offset_left = 17.777779
+offset_top = 5.9259257
+offset_right = 57.77778
+offset_bottom = 45.925926
+scale = Vector2(0.495, 0.495)
+texture = ExtResource("4_dex5h")
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="Node2D/TextureButton" to="." method="_on_texture_button_pressed"]

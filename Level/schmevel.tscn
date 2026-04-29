@@ -1,0 +1,80 @@
+[gd_scene format=4 uid="uid://cy1seo7nqbef7"]
+
+[ext_resource type="Script" uid="uid://bbgfp76omngdl" path="res://Level/schmevel.gd" id="1_hcjw8"]
+[ext_resource type="TileSet" path="res://Level/ground.tres" id="2_m0bew"]
+[ext_resource type="TileSet" uid="uid://dwjjjcil6r31r" path="res://Level/accessoire.tres" id="3_kx012"]
+[ext_resource type="TileSet" uid="uid://b4a2cqdy5q21w" path="res://Level/rails.tres" id="4_g0nup"]
+[ext_resource type="PackedScene" uid="uid://bo1cpe7ekrm1q" path="res://grid_map/Grid.tscn" id="5_42xew"]
+[ext_resource type="PackedScene" uid="uid://e0bhy6f25e6y" path="res://Actors/Station/Station.tscn" id="6_kx012"]
+[ext_resource type="Script" uid="uid://ckw0hvfb2b3t3" path="res://Actors/Station/train_schedule.gd" id="7_42xew"]
+[ext_resource type="PackedScene" uid="uid://d5ryhf3lp2yi" path="res://TileHolder/TrackHolder.tscn" id="8_g0nup"]
+[ext_resource type="PackedScene" uid="uid://cmrvi1c2ff8mv" path="res://TileHolder/TrackTile/CrossTile.tscn" id="9_itfnq"]
+[ext_resource type="PackedScene" uid="uid://d4fxy1jx46wg0" path="res://Actors/Train/Button/TrainButton.tscn" id="10_itfnq"]
+
+[sub_resource type="Resource" id="Resource_8bl30"]
+script = ExtResource("7_42xew")
+train_type = 0
+target = "B"
+metadata/_custom_type_script = "uid://ckw0hvfb2b3t3"
+
+[sub_resource type="Resource" id="Resource_itfnq"]
+script = ExtResource("7_42xew")
+target = "B"
+metadata/_custom_type_script = "uid://ckw0hvfb2b3t3"
+
+[node name="Level" type="Node2D" unique_id=1004307011]
+script = ExtResource("1_hcjw8")
+
+[node name="Ground" type="TileMapLayer" parent="." unique_id=1720023518]
+tile_map_data = PackedByteArray("AAAFAAIAAQAAAAAAAAAFAAEAAQAAAAAAAAAEAAEAAQAAAAAAAAADAAEAAQAAAAAAAAADAAIAAQAAAAAAAAADAAMAAQAAAAAAAAADAAQAAQAAAAAAAAADAAUAAQAAAAAAAAADAAYAAQAAAAAAAAADAAcAAQAAAAAAAAADAAgAAQAAAAAAAAAEAAgAAQAAAAAAAAAFAAgAAQAAAAAAAAAGAAgAAQAAAAAAAAAHAAgAAQAAAAAAAAAIAAgAAQAAAAAAAAAJAAgAAQAAAAAAAAAFAAMAAQAAAAAAAAAFAAQAAQAAAAAAAAAFAAUAAQAAAAAAAAAFAAYAAQAAAAAAAAAGAAYAAQAAAAAAAAAHAAYAAQAAAAAAAAAIAAYAAQAAAAAAAAAJAAYAAQAAAAAAAAAKAAYAAQAAAAAAAAALAAYAAQAAAAAAAAAMAAYAAQAAAAAAAAANAAYAAQAAAAAAAAAKAAgAAQAAAAAAAAALAAgAAQAAAAAAAAAMAAgAAQAAAAAAAAANAAgAAQAAAAAAAAANAAcAAQAAAAAAAAA=")
+tile_set = ExtResource("2_m0bew")
+
+[node name="Accessoire" type="TileMapLayer" parent="." unique_id=542044567]
+tile_set = ExtResource("3_kx012")
+
+[node name="Rails" type="TileMapLayer" parent="." unique_id=1587177521]
+tile_map_data = PackedByteArray("AAAEAAIAAAAAAAAAAAAEAAMAAAAAAAEAAAAEAAQAAAAAAAEAAAAEAAUAAAAAAAEAAAAEAAYAAAAAAAEAAAAEAAcAAAABAAIAAAAFAAcAAAACAAMAAAAGAAcAAAACAAMAAAAHAAcAAAACAAMAAAAIAAcAAAACAAMAAAAJAAcAAAACAAMAAAAKAAYAAAAAAAEAAAAKAAUAAAAAAAEAAAAKAAQAAAAAAAAAAAAKAAgAAAAAAAEAAAAKAAkAAAABAAIAAAALAAkAAAACAAMAAAAMAAkAAAACAAMAAAANAAkAAAADAAIAAAANAAgAAAAAAAEAAAANAAcAAAAAAAAAAAALAAcAAAADAAMAAAAKAAcAAAACAAEAAAA=")
+tile_set = ExtResource("4_g0nup")
+
+[node name="Grid" parent="." unique_id=798381590 instance=ExtResource("5_42xew")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 96.0
+offset_top = 32.0
+offset_right = 576.0
+offset_bottom = 512.0
+grow_horizontal = 1
+grow_vertical = 1
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 5
+cellWidth = 96
+cellHeight = 96
+
+[node name="Station" parent="." unique_id=436988140 instance=ExtResource("6_kx012")]
+position = Vector2(336, 129)
+trains = Array[ExtResource("7_42xew")]([SubResource("Resource_8bl30")])
+
+[node name="Holder" parent="." unique_id=91845701 instance=ExtResource("8_g0nup")]
+position = Vector2(577, 60)
+
+[node name="Station2" parent="." unique_id=647371737 instance=ExtResource("6_kx012")]
+position = Vector2(433, 241)
+label = "B"
+
+[node name="TrainButton" parent="." unique_id=1538748435 instance=ExtResource("10_itfnq")]
+offset_left = 597.0
+offset_top = 214.0
+offset_right = 661.0
+offset_bottom = 246.0
+
+[node name="Station3" parent="." unique_id=958181848 instance=ExtResource("6_kx012")]
+position = Vector2(145, 84)
+label = "C"
+trains = Array[ExtResource("7_42xew")]([SubResource("Resource_itfnq")])
+
+[node name="TrackTile" parent="." unique_id=391364208 instance=ExtResource("9_itfnq")]
+position = Vector2(320, 224)
+
+[connection signal="gui_input" from="Grid" to="." method="_on_grid_gui_input"]

@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://bp8a6rkmeyy4g"]
+
+[ext_resource type="Script" uid="uid://dl4kh0mityowt" path="res://Level/level.gd" id="1_c0bxk"]
+[ext_resource type="PackedScene" uid="uid://d5ryhf3lp2yi" path="res://TileHolder/TrackHolder.tscn" id="6_ry0t3"]
+
+[node name="BaseLevel" type="Node2D" unique_id=1004307011]
+script = ExtResource("1_c0bxk")
+
+[node name="Holder" parent="." unique_id=91845701 instance=ExtResource("6_ry0t3")]
+position = Vector2(748, 7)
+scale = Vector2(2, 2)

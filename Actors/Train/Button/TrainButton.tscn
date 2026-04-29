@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://d4fxy1jx46wg0"]
+
+[ext_resource type="Texture2D" uid="uid://31idb1brrt1c" path="res://Actors/Train/Button/button.png" id="1_x3x0d"]
+[ext_resource type="Texture2D" uid="uid://cd0b36bbg6oru" path="res://Actors/Train/Button/button_pressed.png" id="2_epgtc"]
+[ext_resource type="Texture2D" uid="uid://2aahq6h1p2s0" path="res://Actors/Train/Button/button_hover.png" id="3_y0wkp"]
+[ext_resource type="Script" uid="uid://b2ylrla0tmle1" path="res://Actors/Train/Button/label_schmabel.gd" id="4_s2qmv"]
+
+[node name="TrainButton" type="TextureButton" unique_id=1538748435]
+toggle_mode = true
+texture_normal = ExtResource("1_x3x0d")
+texture_pressed = ExtResource("2_epgtc")
+texture_hover = ExtResource("3_y0wkp")
+script = ExtResource("4_s2qmv")
+
+[node name="Label" type="Label" parent="." unique_id=1179896473]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 84.0
+offset_bottom = 28.0
+theme_override_font_sizes/font_size = 11
+text = "Start train"

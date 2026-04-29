@@ -1,0 +1,107 @@
+[gd_scene format=3 uid="uid://d5ryhf3lp2yi"]
+
+[ext_resource type="Script" uid="uid://b88uww1icsg" path="res://TileHolder/track_holder.gd" id="1_ul165"]
+
+[node name="Holder" type="Node2D" unique_id=91845701 groups=["Holder"]]
+script = ExtResource("1_ul165")
+tile_path = "uid://toyrxvks063b"
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=631933671]
+self_modulate = Color(0.06469653, 0.06469653, 0.06469653, 1)
+offset_right = 133.0
+offset_bottom = 133.0
+mouse_filter = 2
+color = Color(0.16206557, 0.1620656, 0.16206557, 1)
+
+[node name="GridContainer" type="GridContainer" parent="ColorRect" unique_id=1232008429]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 132.0
+offset_bottom = 132.0
+mouse_filter = 2
+theme_override_constants/h_separation = 1
+theme_override_constants/v_separation = 1
+columns = 4
+
+[node name="ColorRect3" type="ColorRect" parent="ColorRect/GridContainer" unique_id=462064368]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ColorRect4" type="ColorRect" parent="ColorRect/GridContainer" unique_id=598118667]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ColorRect5" type="ColorRect" parent="ColorRect/GridContainer" unique_id=136908174]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ColorRect6" type="ColorRect" parent="ColorRect/GridContainer" unique_id=893068502]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ColorRect7" type="ColorRect" parent="ColorRect/GridContainer" unique_id=1780902224]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ColorRect8" type="ColorRect" parent="ColorRect/GridContainer" unique_id=2047864882]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ColorRect9" type="ColorRect" parent="ColorRect/GridContainer" unique_id=1743204106]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ColorRect10" type="ColorRect" parent="ColorRect/GridContainer" unique_id=394658381]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ColorRect11" type="ColorRect" parent="ColorRect/GridContainer" unique_id=461181575]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ColorRect12" type="ColorRect" parent="ColorRect/GridContainer" unique_id=1170428533]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ColorRect13" type="ColorRect" parent="ColorRect/GridContainer" unique_id=978200177]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ColorRect14" type="ColorRect" parent="ColorRect/GridContainer" unique_id=1985866709]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ColorRect15" type="ColorRect" parent="ColorRect/GridContainer" unique_id=492618664]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ColorRect16" type="ColorRect" parent="ColorRect/GridContainer" unique_id=1567643134]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="ColorRect/GridContainer" unique_id=1423973234]
+show_behind_parent = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ColorRect2" type="ColorRect" parent="ColorRect/GridContainer" unique_id=1202392104]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+mouse_filter = 2

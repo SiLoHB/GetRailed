@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://bqnhi1h2jpre"]
+
+[ext_resource type="Script" uid="uid://bj71reg85o4d7" path="res://Actors/Train/train.gd" id="1_hod3q"]
+[ext_resource type="Texture2D" uid="uid://dgm368mfbgyf4" path="res://Actors/Train/SchweizerKorkodil_front.png" id="4_n6k0t"]
+[ext_resource type="Texture2D" uid="uid://cuhaq5qcdb50o" path="res://Actors/Train/SchweizerKorkodil_side.png" id="5_yq8f3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q62qj"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w2fji"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_n6k0t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_yq8f3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="SlowTrain" type="CharacterBody2D" unique_id=1029754237]
+script = ExtResource("1_hod3q")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=418362020]
+shape = SubResource("RectangleShape2D_q62qj")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CollisionShape2D" unique_id=733190548]
+unique_name_in_owner = true
+sprite_frames = SubResource("SpriteFrames_w2fji")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=2014716535]
+path_desired_distance = 8.0
+target_desired_distance = 0.1
+path_postprocessing = 1
+simplify_path = true
+debug_use_custom = true
+debug_path_custom_color = Color(0.9207399, 0.0006857669, 0.9207335, 1)
