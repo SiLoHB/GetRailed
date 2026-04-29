@@ -16,15 +16,19 @@ func _enter_tree() -> void:
 	print("Train ENTER TREE: ", name)
 
 func _ready() -> void:
+	print("=== TileMapLayer dump start ===")
+	for n in get_tree().get_root().find_children("*", "TileMapLayer", true, false):
+		print("TileMapLayer:", n.name, " path=", (n as Node).get_path())
+	print("=== TileMapLayer dump end ===")
 	print("Train READY, rails export=", rails)
 	print("Train READY: ", name)
 	Event.start_trains.connect(_on_start_trains)
 	Event.stop_trains.connect(_on_stop_trains)
 
 	if rails == null:
-		var rails_node := get_tree().get_root().find_child("Rails", true, false)
-		if rails_node is TileMapLayer:
-			rails = rails_node
+		for n in get_tree().get_root().find_children("Rails", "TileMapLayer", true, false):
+			rails = n as TileMapLayer
+			break
 
 	print("Rails after lookup =", rails)
 	if rails == null:
