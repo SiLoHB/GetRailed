@@ -33,7 +33,7 @@ static func get_connections(tile_type: int) -> Array[Vector2]:
 			return [DIR_DOWN, DIR_LEFT]
 		
 		4: # vertical
-			return [DIR_DOWN, DIR_RIGHT]
+			return [DIR_DOWN, DIR_UP]
 		5: # T missing left (has U,R,D)
 			return [DIR_UP, DIR_RIGHT, DIR_DOWN]
 		6: # crossing (4-way)

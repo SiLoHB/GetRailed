@@ -63,7 +63,7 @@ tile_set = ExtResource("5_m2sjq")
 [node name="Rails" type="Node2D" parent="." unique_id=1135777497]
 
 [node name="Rails" type="TileMapLayer" parent="Rails" unique_id=1587177521]
-tile_map_data = PackedByteArray("AAAEAAMAAAACAAMAAAAFAAMAAAACAAMAAAAHAAMAAAACAAMAAAAIAAMAAAACAAMAAAA=")
+tile_map_data = PackedByteArray("AAAEAAMAAAACAAMAAAAFAAMAAAACAAMAAAAHAAMAAAACAAMAAAAIAAMAAAACAAMAAAADAAMAAAABAAMAAAAJAAMAAAADAAMAAAA=")
 tile_set = ExtResource("6_oitdi")
 
 [node name="Grid" parent="Rails" unique_id=798381590 instance=ExtResource("7_7cifd")]

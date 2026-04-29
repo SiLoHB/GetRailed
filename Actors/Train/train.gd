@@ -23,13 +23,30 @@ func _ready() -> void:
 			rails = level.get_node_or_null("Rails")
 
 	if rails != null:
-		current_cell = rails.local_to_map(rails.to_local(global_position))
-		global_position = _get_cell_center_global(current_cell)
-
 		var tile_type := _get_tile_type(current_cell)
 		var options := RailSystem.get_connections(tile_type)
 		current_dir = _choose_next_direction(tile_type, options, Vector2.ZERO)
-		current_dir = Vector2.RIGHT
+
+		# Wenn Bahnhof/Spawn-Tile keine Connections liefert:
+		if current_dir == Vector2.ZERO:
+			current_dir = _choose_start_direction_from_neighbors(current_cell)
+
+func _choose_start_direction_from_neighbors(cell: Vector2i) -> Vector2:
+	# Prüfe Nachbarn in stabiler Reihenfolge (deterministisch)
+	var dirs := [Vector2.RIGHT, Vector2.DOWN, Vector2.LEFT, Vector2.UP]
+
+	for dir: Vector2 in dirs:
+		var neighbor := cell + Vector2i(int(dir.x), int(dir.y))
+		var neighbor_type := _get_tile_type(neighbor)
+		if neighbor_type == -1:
+			continue
+
+		# Kann der Nachbar zurück in unsere Zelle?
+		var neighbor_conns := RailSystem.get_connections(neighbor_type)
+		if neighbor_conns.has(-dir):
+			return dir
+
+	return Vector2.ZERO
 
 func _physics_process(delta: float) -> void:
 	if not running or rails == null:
