@@ -13,23 +13,29 @@ var current_dir: Vector2 = Vector2.ZERO
 var current_cell: Vector2i
 
 func _ready() -> void:
-	Event.start_trains.connect(_on_train_button_pressed)
-	Event.stop_trains.connect(_on_train_button_pressed)
+	Event.start_trains.connect(_on_start_trains)
+	Event.stop_trains.connect(_on_stop_trains)
 
-	# If not assigned in inspector, try to find the level rail layer by name.
 	if rails == null:
 		var level := get_tree().get_first_node_in_group("Level")
 		if level != null:
 			rails = level.get_node_or_null("Rails")
 
-	if rails != null:
-		var tile_type := _get_tile_type(current_cell)
-		var options := RailSystem.get_connections(tile_type)
-		current_dir = _choose_next_direction(tile_type, options, Vector2.ZERO)
+	if rails == null:
+		return
 
-		# Wenn Bahnhof/Spawn-Tile keine Connections liefert:
-		if current_dir == Vector2.ZERO:
-			current_dir = _choose_start_direction_from_neighbors(current_cell)
+	# WICHTIG: Startzelle korrekt bestimmen
+	current_cell = rails.local_to_map(rails.to_local(global_position))
+	global_position = _get_cell_center_global(current_cell)
+
+	# Versuch 1: vom aktuellen Tile aus (falls da Rail liegt)
+	var tile_type := _get_tile_type(current_cell)
+	var options := RailSystem.get_connections(tile_type)
+	current_dir = _choose_next_direction(tile_type, options, Vector2.ZERO)
+
+	# Versuch 2: wenn Bahnhof/Spawn-Tile kein Rail ist -> Nachbarn prüfen
+	if current_dir == Vector2.ZERO:
+		current_dir = _choose_start_direction_from_neighbors(current_cell)
 
 func _choose_start_direction_from_neighbors(cell: Vector2i) -> Vector2:
 	# Prüfe Nachbarn in stabiler Reihenfolge (deterministisch)
@@ -129,7 +135,8 @@ func _get_cell_center_global(cell: Vector2i) -> Vector2:
 	var local_center: Vector2 = rails.map_to_local(cell) + (tile_size * 0.5)
 	return rails.to_global(local_center)
 
-func _on_train_button_pressed() -> void:
-	if running:
-		queue_free()
-	running = !running
+func _on_start_trains() -> void:
+	running = true
+
+func _on_stop_trains() -> void:
+	queue_free() # oder running = false, je nachdem was du willst
