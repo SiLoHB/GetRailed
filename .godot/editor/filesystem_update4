@@ -7,3 +7,4 @@ res://Level/System/RailSystem.gd
 res://Level/level_5.tscn
 res://Actors/Train/train.gd
 res://Level/level_1.tscn
+res://LevelSelect/world_1.gd

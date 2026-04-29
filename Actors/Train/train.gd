@@ -12,20 +12,33 @@ var running := true
 var current_dir: Vector2 = Vector2.ZERO
 var current_cell: Vector2i
 
+func _enter_tree() -> void:
+	print("Train ENTER TREE: ", name)
+
 func _ready() -> void:
+	print("Train READY, rails export=", rails)
+	print("Train READY: ", name)
 	Event.start_trains.connect(_on_start_trains)
 	Event.stop_trains.connect(_on_stop_trains)
 
 	if rails == null:
-		var level := get_tree().get_first_node_in_group("Level")
-		if level != null:
-			rails = level.get_node_or_null("Rails")
+		var rails_node := get_tree().get_root().find_child("Rails", true, false)
+		if rails_node is TileMapLayer:
+			rails = rails_node
 
+	print("Rails after lookup =", rails)
 	if rails == null:
+		push_error("Train: rails is NULL (can't move)")
 		return
 
 	# WICHTIG: Startzelle korrekt bestimmen
 	current_cell = rails.local_to_map(rails.to_local(global_position))
+	print("Spawn global=", global_position, " cell=", current_cell)
+	print("Tile type at cell=", _get_tile_type(current_cell))
+	print("Neighbor types: R=", _get_tile_type(current_cell + Vector2i(1,0)),
+		" D=", _get_tile_type(current_cell + Vector2i(0,1)),
+		" L=", _get_tile_type(current_cell + Vector2i(-1,0)),
+		" U=", _get_tile_type(current_cell + Vector2i(0,-1)))
 	global_position = _get_cell_center_global(current_cell)
 
 	# Versuch 1: vom aktuellen Tile aus (falls da Rail liegt)
