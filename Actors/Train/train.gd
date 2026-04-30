@@ -27,34 +27,18 @@ func _ready() -> void:
 		running = false 
 		queue_free())
 
+	# rails nur suchen, wenn nicht bereits vom Spawner gesetzt
 	if rails == null:
-		for n in get_tree().get_root().find_children("Rails", "TileMapLayer", true, false):
-			rails = n as TileMapLayer
-			break
+		var rails_layers := get_tree().get_root().find_children("Rails", "TileMapLayer", true, false)
+		if rails_layers.size() > 0:
+			rails = rails_layers[0] as TileMapLayer
+	print("Train rails node path=", rails.get_path() if rails != null else "<null>")
 
 	print("Rails after lookup =", rails)
 	if rails == null:
 		push_error("Train: rails is NULL (can't move)")
 		return
 
-	# WICHTIG: Startzelle korrekt bestimmen
-	current_cell = rails.local_to_map(rails.to_local(global_position))
-	print("Spawn global=", global_position, " cell=", current_cell)
-	print("Tile type at cell=", _get_tile_type(current_cell))
-	print("Neighbor types: R=", _get_tile_type(current_cell + Vector2i(1,0)),
-		" D=", _get_tile_type(current_cell + Vector2i(0,1)),
-		" L=", _get_tile_type(current_cell + Vector2i(-1,0)),
-		" U=", _get_tile_type(current_cell + Vector2i(0,-1)))
-	global_position = _get_cell_center_global(current_cell)
-
-	# Versuch 1: vom aktuellen Tile aus (falls da Rail liegt)
-	var tile_type := _get_tile_type(current_cell)
-	var options := RailSystem.get_connections(tile_type)
-	current_dir = _choose_next_direction(tile_type, options, Vector2.ZERO)
-
-	# Versuch 2: wenn Bahnhof/Spawn-Tile kein Rail ist -> Nachbarn prüfen
-	if current_dir == Vector2.ZERO:
-		current_dir = _choose_start_direction_from_neighbors(current_cell)
 
 func _choose_start_direction_from_neighbors(cell: Vector2i) -> Vector2:
 	# Prüfe Nachbarn in stabiler Reihenfolge (deterministisch)
@@ -153,3 +137,19 @@ func _get_cell_center_global(cell: Vector2i) -> Vector2:
 	var tile_size: Vector2 = Vector2(rails.tile_set.tile_size) # Vector2i -> Vector2
 	var local_center: Vector2 = rails.map_to_local(cell) + (tile_size * 0.5)
 	return rails.to_global(local_center)
+
+func init_on_rails(rails_layer: TileMapLayer, spawn_pos: Vector2) -> void:
+	rails = rails_layer
+	global_position = spawn_pos
+
+	current_cell = rails.local_to_map(rails.to_local(global_position))
+	# optional snap auf center nur wenn tile da ist
+	if rails.get_cell_tile_data(current_cell) != null:
+		global_position = _get_cell_center_global(current_cell)
+
+	var tile_type := _get_tile_type(current_cell)
+	var options := RailSystem.get_connections(tile_type)
+	current_dir = _choose_next_direction(tile_type, options, Vector2.ZERO)
+
+	if current_dir == Vector2.ZERO:
+		current_dir = _choose_start_direction_from_neighbors(current_cell)

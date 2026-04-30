@@ -26,12 +26,14 @@ func _ready() -> void:
 		return
 	Event.start_trains.connect(on_start_trains)
 	Event.stop_trains.connect(on_stop_trains)
+	print("Station READY label=", label, " path=", get_path())
 
 func on_stop_trains() -> void:
 	spawning_enabled = false
 	spawn_token += 1
 ## main function that spawns trains
 func on_start_trains() -> void:
+	print("Station on_start_trains label=", label, " path=", get_path(), " trains.size=", trains.size())
 	spawning_enabled = true
 	spawn_token += 1	
 	var my_token := spawn_token
@@ -43,7 +45,9 @@ func on_start_trains() -> void:
 		if not target:
 			push_error("target station not found")
 			continue
+			print("Station schedule start_delay=", schedule.start_delay, " train_type=", schedule.train_type, " target=", schedule.target)
 		await get_tree().create_timer(schedule.start_delay).timeout
+		print("Station spawning NOW label=", label)
 		if not spawning_enabled or my_token != spawn_token:
 			return
 		var train := create_train(schedule.train_type) as Train
@@ -78,14 +82,13 @@ func on_start_trains() -> void:
 			push_error("Station: No rail tile on/adjacent to station. station_cell=" + str(station_cell))
 			continue
 
-		# Wichtig: Train NICHT als Kind der Station hinzufügen (verhindert Transform-Offsets)
 		get_tree().current_scene.add_child(train)
-
-		# Rails direkt setzen (damit Train nicht suchen muss)
 		train.rails = rails_layer
 
-		# Exakt auf Zellenposition setzen
-		train.global_position = _cell_center_global(rails_layer, spawn_cell)
+		var spawn_pos := _cell_center_global(rails_layer, spawn_cell)
+		train.global_position = spawn_pos
+		print("Station spawning train at ", spawn_pos, " spawn_cell=", spawn_cell, " station_global=", global_position)
+		train.init_on_rails(rails_layer, spawn_pos)
 
 func create_train(type: Enum.TrainType) -> Train:
 	var train_node: Node = null
