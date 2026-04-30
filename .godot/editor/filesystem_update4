@@ -1,11 +1,7 @@
-res://Actors/Train/TrainYellow.tscn
+res://Actors/Station/station.gd
 res://Menu/text.tres
 res://Level/rails.tres
 res://Level/gras_tileset.tres
 res://Level/accessoire.tres
-res://Level/System/RailSystem.gd
-res://Level/level_5.tscn
-res://Actors/Train/train.gd
 res://Level/level_1.tscn
-res://LevelSelect/world_1.gd
-res://Actors/Station/station.gd
+res://Actors/Train/train.gd

@@ -33,7 +33,7 @@ func on_stop_trains() -> void:
 ## main function that spawns trains
 func on_start_trains() -> void:
 	spawning_enabled = true
-	spawn_token += 1
+	spawn_token += 1	
 	var my_token := spawn_token
 
 	for schedule: TrainSchedule in trains:
@@ -49,8 +49,43 @@ func on_start_trains() -> void:
 		var train := create_train(schedule.train_type) as Train
 		if train == null:
 			continue
+
 		train.target = target
-		add_child(train)
+
+		var rails_layer := _get_rails_layer()
+		if rails_layer == null:
+			push_error("Station: Rails TileMapLayer not found - not spawning train")
+			continue
+
+		# Station-Zelle im Rails-Grid bestimmen
+		var station_cell := rails_layer.local_to_map(rails_layer.to_local(global_position))
+
+		# 1) Wenn direkt auf der Station-Zelle ein Rail liegt -> nimm die
+		var spawn_cell := station_cell
+		var found := rails_layer.get_cell_tile_data(spawn_cell) != null
+
+		# 2) sonst: nimm ein benachbartes Rail-Tile
+		if not found:
+			var dirs := [Vector2i(1, 0), Vector2i(0, 1), Vector2i(-1, 0), Vector2i(0, -1)]
+			for d in dirs:
+				var c := station_cell + d as Vector2i
+				if rails_layer.get_cell_tile_data(c) != null:
+					spawn_cell = c
+					found = true
+					break
+
+		if not found:
+			push_error("Station: No rail tile on/adjacent to station. station_cell=" + str(station_cell))
+			continue
+
+		# Wichtig: Train NICHT als Kind der Station hinzufügen (verhindert Transform-Offsets)
+		get_tree().current_scene.add_child(train)
+
+		# Rails direkt setzen (damit Train nicht suchen muss)
+		train.rails = rails_layer
+
+		# Exakt auf Zellenposition setzen
+		train.global_position = _cell_center_global(rails_layer, spawn_cell)
 
 func create_train(type: Enum.TrainType) -> Train:
 	var train_node: Node = null
@@ -84,6 +119,15 @@ func get_target_station(target_label: String) -> Station:
 	
 	return null
 
+func _get_rails_layer() -> TileMapLayer:
+	# findet den TileMapLayer der wirklich "Rails" heißt
+	var rails_layers := get_tree().get_root().find_children("Rails", "TileMapLayer", true, false)
+	return rails_layers[0] as TileMapLayer if rails_layers.size() > 0 else null
+
+func _cell_center_global(rails_layer: TileMapLayer, cell: Vector2i) -> Vector2:
+	# Variante B (ohne +tile_size*0.5) ist bei vielen Godot4 TileMapLayer Setups korrekt.
+	# Wenn es bei dir um "halbe Zelle" daneben liegt, sag Bescheid, dann switchen wir auf +0.5.
+	return rails_layer.to_global(rails_layer.map_to_local(cell))
 
 func _on_train_detection_area_body_entered(body: Node2D) -> void:
 	if body is Train:

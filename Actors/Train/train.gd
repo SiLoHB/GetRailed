@@ -21,9 +21,11 @@ func _ready() -> void:
 		print("TileMapLayer:", n.name, " path=", (n as Node).get_path())
 	print("=== TileMapLayer dump end ===")
 	print("Train READY, rails export=", rails)
-	print("Train READY: ", name)
-	Event.start_trains.connect(_on_start_trains)
-	Event.stop_trains.connect(_on_stop_trains)
+	
+	Event.start_trains.connect(func(): running = true)
+	Event.stop_trains.connect(func(): 
+		running = false 
+		queue_free())
 
 	if rails == null:
 		for n in get_tree().get_root().find_children("Rails", "TileMapLayer", true, false):
@@ -151,9 +153,3 @@ func _get_cell_center_global(cell: Vector2i) -> Vector2:
 	var tile_size: Vector2 = Vector2(rails.tile_set.tile_size) # Vector2i -> Vector2
 	var local_center: Vector2 = rails.map_to_local(cell) + (tile_size * 0.5)
 	return rails.to_global(local_center)
-
-func _on_start_trains() -> void:
-	running = true
-
-func _on_stop_trains() -> void:
-	queue_free() # oder running = false, je nachdem was du willst

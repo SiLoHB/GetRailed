@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://bqnhi1h2jpre"]
+[gd_scene format=3 uid="uid://csiqr503i70yc"]
 
 [ext_resource type="Script" uid="uid://bj71reg85o4d7" path="res://Actors/Train/train.gd" id="1_hod3q"]
 [ext_resource type="Texture2D" uid="uid://dgm368mfbgyf4" path="res://Actors/Train/SchweizerKorkodil_front.png" id="4_n6k0t"]
